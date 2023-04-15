@@ -21,15 +21,15 @@ fi
 
 for var in "$@"
 do
-	wg genkey | tee $var:_privatekey | wg pubkey > $var:_publickey
+	wg genkey | tee ${var}_privatekey | wg pubkey > ${var}_publickey
 
-	pbkey=$(cat $var:_publickey)
-	prkey=$(cat $var:_privatekey)
+	pbkey=$(cat ${var}_publickey)
+	prkey=$(cat ${var}_privatekey)
 
 	ipLS=$(grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' $CONFIGFILE | tail -1 | cut -d . -f 4)
 	ipLS=$(($ipLS + 1))
 
-	resultIp="$DEFAULTIP$ipLS$MASK"
+	resultIp="${DEFAULTIP}${ipLS}${MASK}"
 
 	echo "" >> $CONFIGFILE
 	echo "#$var" >> $CONFIGFILE

@@ -5,7 +5,7 @@ script newclient.sh
 
 > :warning: **The script makes sense to use only when wireguard is already configured**
 
-
+ 
 0. generates keys for a new client
 1. adds a new client to the configuration file.
 2. restarts wireguard

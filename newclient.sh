@@ -8,6 +8,16 @@ MASK="/32"
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+usage()
+{
+  echo "USAGE: ./newclient.sh clent1 client2...clientN, where N >= 1"
+}
+
+if [[ $# -eq 0 ]]
+then
+	usage
+	exit 1
+fi
 
 for var in "$@"
 do

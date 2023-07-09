@@ -29,3 +29,5 @@ echo -e $CONFIG  > $CONFIGFILE
 systemctl enable wg-quick@wg0.service
 systemctl start wg-quick@wg0.service
 systemctl status wg-quick@wg0 | head -n 3
+
+sudo apt install qrencode

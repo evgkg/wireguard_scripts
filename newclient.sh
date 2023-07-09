@@ -8,6 +8,8 @@ MASK="/32"
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+echo "====j2wj wireguard new client===="
+
 usage()
 {
 	echo "USAGE: ./newclient.sh clent1 client2 ...clientN, where N >= 1"
@@ -25,7 +27,8 @@ do
 
 	pbkey=$(cat ${var}_publickey)
 	prkey=$(cat ${var}_privatekey)
-
+	serverPubKey=$(cat publickey)
+	serverIp=$(hostname -i)
 	ipLS=$(grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' $CONFIGFILE | tail -1 | cut -d . -f 4)
 	ipLS=$(($ipLS + 1))
 
@@ -40,7 +43,21 @@ do
 	echo -e "${GREEN}$var privatekey:${NC}\t $prkey"
 	echo -e "${GREEN}$var ip:${NC}\t\t $resultIp"
 	echo ""
+
+	CONFIG=""
+	CONFIG="${CONFIG}[Interface]\n"
+	CONFIG="${CONFIG}PrivateKey = ${prkey}\n"
+	CONFIG="${CONFIG}Address = ${resultIp}\n"
+	CONFIG="${CONFIG}DNS = 8.8.8.8\n\n"
+	CONFIG="${CONFIG}[Peer]\n"
+	CONFIG="${CONFIG}PublicKey = ${serverPubKey}\n"
+	CONFIG="${CONFIG}Endpoint = ${serverIp}:51830\n"
+	CONFIG="${CONFIG}AllowedIPs = 0.0.0.0/0\n\n"
+
+	echo -e $CONFIG > ${var}.conf
+	qrencode -t ansiutf8 < ${var}.conf
 done
 
 systemctl restart wg-quick@wg0
 systemctl status wg-quick@wg0 | head -n 3
+

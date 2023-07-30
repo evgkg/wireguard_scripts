@@ -5,14 +5,14 @@
 
 install wg server:
 ```bash
-curl -O https://raw.githubusercontent.com/weikelake/wireguard_scripts/master/createwg.sh
+curl -O https://raw.githubusercontent.com/evgkg/wireguard_scripts/master/createwg.sh
 chmod +x createwg.sh
 ./createwg.sh
 ```
 add new client
 ```bash
 cd /etc/wireguard
-curl -O https://raw.githubusercontent.com/weikelake/wireguard_scripts/master/newclient.sh
+curl -O https://raw.githubusercontent.com/evgkg/wireguard_scripts/master/newclient.sh
 chmod +x newclient.sh
 ./newclient.sh clientname
 ```

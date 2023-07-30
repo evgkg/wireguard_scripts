@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "====j2wj wireguard installer===="
+echo "====evgkg wireguard installer===="
 
 sudo apt udpate && apt upgrade -y
 apt install -y wireguard
